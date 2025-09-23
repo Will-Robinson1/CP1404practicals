@@ -5,7 +5,7 @@ def main():
     mak_asterisks(password)
 
 
-def mak_asterisks(password: int):
+def make_asterisks(password: int):
     for i in range(0, password, 1):
         print("*", end="")
 
