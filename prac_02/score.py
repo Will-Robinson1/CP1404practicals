@@ -5,13 +5,19 @@ Program to determine score status
 import random
 
 def main():
-    score = float(input("Enter score: "))
+    score = get_score()
     result = determine_result(score)
     print(result)
     score = random.randint(0, 100)
     result = determine_result(score)
     print("Random number: ", score)
     print(result)
+
+
+def get_score() -> float:
+    score = float(input("Enter score: "))
+    return score
+
 
 def determine_result(score: float):
     if score < 0 or score > 100:

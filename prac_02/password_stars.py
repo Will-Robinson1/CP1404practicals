@@ -1,8 +1,9 @@
+passwordmin = 8
 def main():
-    passwordmin = 8
+
 
     password = get_password(passwordmin)
-    mak_asterisks(password)
+    make_asterisks(password)
 
 
 def make_asterisks(password: int):
@@ -13,7 +14,7 @@ def make_asterisks(password: int):
 def get_password(passwordmin: int) -> int:
     password = len(input("Enter a Password: "))
 
-    if password < passwordmin:
+    while password < passwordmin:
         print("Password is too short")
         password = input("Enter a Password: ")
     return password

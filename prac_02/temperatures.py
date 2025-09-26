@@ -2,10 +2,12 @@
 CP1404/CP5632 - Practical
 Program for temperature conversion
 """
-def main():
-    MENU = """C - Convert Celsius to Fahrenheit
+MENU = """C - Convert Celsius to Fahrenheit
     F - Convert Fahrenheit to Celsius
     Q - Quit"""
+
+def main():
+
     print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
