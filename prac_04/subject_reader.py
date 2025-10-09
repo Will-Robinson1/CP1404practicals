@@ -6,23 +6,22 @@ Data file -> lists program
 FILENAME = "subject_data.txt"
 
 def main():
-    data = load_data(FILENAME)
-    print(data)
+    imported_subject_data = load_data_from_file(FILENAME)
+    details = prints_subject_details(imported_subject_data)
+    print(details)
 
-
-def load_data(filename=FILENAME):
+def load_data_from_file(filename=FILENAME):
     """Read data from file formatted like: subject,lecturer,number of students."""
+    records = []
     input_file = open(filename)
     for line in input_file:
-        print(line)  # See what a line looks like
-        print(repr(line))  # See what a line really looks like
         line = line.strip()  # Remove the \n
         parts = line.split(',')  # Separate the data into its parts
-        print(parts)  # See what the parts look like (notice the integer is a string)
         parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
-        print(parts)  # See if that worked
-        print("----------")
-    input_file.close()
+        records.append(parts)
+    return records
 
-
+def prints_subject_details(records):
+    subject_details = [f"{subject} is taught by {lecturer} and has {students} students" for subject, lecturer, students in records]
+    return "\n".join(subject_details)
 main()
