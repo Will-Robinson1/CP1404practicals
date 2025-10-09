@@ -4,15 +4,17 @@ MENU = """(G)et a valid score (must be 0-100 inclusive)
 (Q)uit"""
 
 def main():
-
+    score = get_score()
     print(MENU)
     choice = input(">>> ").upper()
+
 
     while choice != "Q":
         if choice == "G":
             score = get_score()
         elif choice == "P":
-            print_score(score)
+            result = print_score(score)
+            print(result)
         elif choice == "S":
             show_stars(score)
         else:
@@ -30,11 +32,12 @@ def get_score():
 
 def print_score(score: float):
     if score >= 90:
-        print("Excellent")
+        result = "Excellent"
     elif score >= 50:
-        print("Passable")
+        result = "Passable"
     else:
-        print("Bad")
+        result = "Bad"
+    return result
 
 def show_stars(score: float):
         for i in range(0, int(score), 1):
