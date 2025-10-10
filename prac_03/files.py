@@ -21,7 +21,7 @@ print(f"Hi {name}!")
 FILENAME = 'numbers.txt'
 
 with open(FILENAME, "r") as in_file:
-    determine_lines = in_file.readlines()
+    determine_lines = in_file.readline()
 calculate_first_two_sum = int(determine_lines[0]) + int(determine_lines[1])
 print(calculate_first_two_sum)
 
