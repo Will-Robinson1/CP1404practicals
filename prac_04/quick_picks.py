@@ -12,12 +12,12 @@ def main():
         return
 
     for _ in range(count):
-        pick = []
-        while len(pick) < NUMBERS_PER_PICK:
+        picks = []
+        while len(picks) < NUMBERS_PER_PICK:
             number = random.randint(MIN_NUMBER, MAX_NUMBER)
-            if number not in pick:  # ensure uniqueness
-                pick.append(number)
-        pick.sort()
-        print(" ".join(f"{n:2d}" for n in pick))
+            if number not in picks:  # ensure uniqueness
+                picks.append(number)
+        picks.sort()
+        print(" ".join(f"{n:2d}" for n in picks))
 
 main()
