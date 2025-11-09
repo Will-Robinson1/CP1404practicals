@@ -6,25 +6,42 @@ Loads and manages a list of Project objects from a tab-delimited file.
 
 from datetime import datetime
 from project import Project
-MENU = "(D)isplay projects\n(Q)uit"
+MENU = ("""-(L)oad projects
+-(S)ave projects 
+-(D)isplay projects
+-(F)ilter projects by date
+-(A)dd new project
+-(U)pdate project
+-(Q)uit""")
 
 def main():
     filename = "projects.txt"
     projects = load_projects(filename)
+    print(f"Loaded {len(projects)} projects from {filename}")
     choice = input(MENU + "\n>>> ").lower()
     while choice != "q":
-        if choice == "d":
+        if choice == "l":
+            filename = input("Filename to load from: ")
+            projects = load_projects(filename)
+        elif choice == "s":
+            filename = input("Filename to save to: ")
+            save_projects(filename, projects)
+        elif choice == "d":
             display_projects(projects)
+        elif choice == "f":
+            filter_by_date(projects)
         elif choice == "a":
             add_project(projects)
         elif choice == "u":
             update_project(projects)
-        elif choice == "s":
-            save_projects(filename, projects)
         else:
             print("Invalid choice.")
         choice = input(MENU + "\n>>> ").lower()
-    print("Goodbye!")
+
+    save_response = input(f"Would you like to save to {filename}? ")
+    if save_response.lower() in ["yes", "y"]:
+        save_projects(filename, projects)
+    print("Thank you for using custom-built project management software.")
 
 def load_projects(filename):
     projects = []
@@ -62,9 +79,9 @@ def save_projects(filename, projects):
 
 def add_project(projects):
     """Add a new project."""
-    print("Add new project:")
+    print("Let's add a new project")
     name = input("Name: ")
-    start_str = input("Start date (dd/mm/yyyy): ")
+    start_str = input("Start date (dd/mm/yy): ")
     start_date = datetime.strptime(start_str, "%d/%m/%Y").date()
     priority = int(input("Priority: "))
     cost = float(input("Cost estimate: $"))
@@ -77,17 +94,28 @@ def update_project(projects):
     for i, p in enumerate(projects):
         print(f"{i}: {p}")
     try:
-        index = int(input("Select project number: "))
+        index = int(input("Project choice: "))
         project = projects[index]
         print(project)
-        new_percent = input("New completion % (blank to skip): ")
-        new_priority = input("New priority (blank to skip): ")
+        new_percent = input("New Percentage: ")
+        new_priority = input("New priority: ")
         if new_percent:
             project.completion_percentage = int(new_percent)
         if new_priority:
             project.priority = int(new_priority)
     except (ValueError, IndexError):
         print("Invalid input.")
+
+def filter_by_date(projects):
+    date_str = input("Show projects that start after date (dd/mm/yy): ")
+    try:
+        filter_date = datetime.strptime(date_str, "%d/%m/%Y").date()
+    except ValueError:
+        print("Invalid date.")
+        return
+    filtered = [p for p in projects if p.start_date >= filter_date]
+    for p in sorted(filtered, key=lambda x: x.start_date):
+        print(p)
 
 if __name__ == "__main__":
     main()
