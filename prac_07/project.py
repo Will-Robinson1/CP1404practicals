@@ -1,13 +1,15 @@
 """
-Milestone 1 – Basic Project class
-Estimated time: ~20 minutes
+CP1404/CP5632 Practical
+Project class to represent details of a project.
+Estimated time: ~1 hours
+Actual time:    45 minutes
 """
 
 from datetime import date
 
 
 class Project:
-    """Represent a project with essential details."""
+    """Represent a project with details."""
 
     def __init__(self, name, start_date, priority, cost_estimate, completion_percentage):
         """Construct a Project object."""
@@ -22,3 +24,7 @@ class Project:
         return (f"{self.name}, start: {self.start_date.strftime('%d/%m/%Y')}, "
                 f"priority {self.priority}, estimate: ${self.cost_estimate:,.2f}, "
                 f"completion: {self.completion_percentage}%")
+
+    def is_complete(self):
+        """Return True if project is complete."""
+        return self.completion_percentage >= 100
