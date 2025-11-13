@@ -12,4 +12,13 @@ class MilesConverterApp(App):
         self.root = Builder.load_file('convert_miles_km.kv')
         return self.root
 
+    def handle_calculate(self):
+        """ handle calculation, output result to label widget """
+        value = self.get_validated_miles()
+        result = value * MILES_TO_KM
+        self.root.ids.output_label.text = str(result)
+
+
+
+
 MilesConverterApp().run()
